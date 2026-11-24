@@ -12,8 +12,8 @@
     "name": "Monster Strike",
     "category": "Mobile",
     "player_id": "YOUR_PLAYER_ID",
-    "description": "怪物彈珠（日版）玩家資訊與好友邀請。",
-    "cover": "",
+    "description": "",
+    "cover": "assets/covers/怪物彈珠.png",
     "qrcode": "",
     "invite_url": ""
   },
