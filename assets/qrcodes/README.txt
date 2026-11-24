@@ -1,0 +1,1 @@
+將好友 QR Code 圖片放在此資料夾，並在 games.json 的 qrcode 欄位填入相對路徑。
