@@ -25,5 +25,14 @@
     "cover": "",
     "qrcode": "",
     "invite_url": ""
+  },
+  {
+    "name": "Pokémon GO",
+    "category": "Mobile",
+    "player_id": "476377462727",
+    "cover": "",
+    "invite_url": "",
+    "qrcode": "",
+    "description": ""
   }
 ]
