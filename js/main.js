@@ -54,6 +54,7 @@ function refreshAdmin(){ $("#admin-journal-list").innerHTML=(data.logs||[]).map(
 
 function resetJournalForm(){$("#journal-form").reset();$("#journal-edit-index").value="";$("#j-date").value=new Date().toLocaleDateString("en-CA");$("#journal-form-heading").textContent="新增每日進度"}
 $("#journal-form-reset").addEventListener("click",resetJournalForm);
+resetJournalForm();
 $("#admin-journal-list").addEventListener("click",e=>{
  const edit=e.target.dataset.editJournal,del=e.target.dataset.deleteJournal;
  if(del!==undefined){data.logs.splice(+del,1);saveDraft();refreshAdmin()}
