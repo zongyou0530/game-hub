@@ -20,11 +20,11 @@
   {
     "name": "Minecraft",
     "category": "PC",
-    "player_id": "Java Edition",
-    "description": "Minecraft Java Edition 生存世界與遊戲紀錄。",
+    "player_id": "",
     "cover": "",
+    "invite_url": "",
     "qrcode": "",
-    "invite_url": ""
+    "description": "Minecraft Java Edition 生存世界與遊戲紀錄。"
   },
   {
     "name": "Pokémon GO",
