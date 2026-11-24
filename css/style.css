@@ -20,3 +20,53 @@
 .field-hint{font-size:9px;color:#777f90;line-height:1.6}
 @media(max-width:800px){.journal-entry{grid-template-columns:1fr}.journal-video-empty{display:none}}
 @media(max-width:560px){.journal-entry{padding:15px;gap:12px}.journal-copy h3{font-size:17px}.journal-images{grid-template-columns:1fr 1fr}}
+
+
+/* Mobile usability fixes: keep the admin action visible and prevent sideways page scrolling. */
+@media (max-width: 560px) {
+  html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+  }
+  .admin-trigger {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: fixed !important;
+    right: 12px !important;
+    bottom: calc(70px + env(safe-area-inset-bottom, 0px)) !important;
+    z-index: 100 !important;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto !important;
+  }
+  .filter-row {
+    flex-wrap: wrap;
+    overflow: visible;
+    max-width: 100%;
+  }
+  .filter-chip {
+    white-space: normal;
+  }
+  .admin-tabs {
+    flex-wrap: wrap;
+    overflow: visible;
+    max-width: 100%;
+  }
+  .admin-tab {
+    white-space: normal;
+    flex: 0 0 auto;
+  }
+  .main-nav {
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden;
+  }
+  .nav-link {
+    min-width: 0;
+    flex: 1 1 0;
+    text-align: center;
+  }
+}
