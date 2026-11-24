@@ -51,6 +51,33 @@ $("#admin-open").addEventListener("click",async()=>{if(!adminSession){location.h
 $("#admin-logout").addEventListener("click",async()=>{try{await api("/auth/logout",{method:"POST"})}catch{}sessionStorage.removeItem("gamehub-session");adminSession="";closeModal("admin-modal");toast("已登出管理帳號")});
 $$(".admin-tab").forEach(b=>b.addEventListener("click",()=>{$$(".admin-tab").forEach(x=>x.classList.toggle("active",x===b));$$(".admin-pane").forEach(x=>x.classList.remove("active"));$("#pane-"+b.dataset.tab).classList.add("active")}));
 function refreshAdmin(){ $("#admin-journal-list").innerHTML=(data.logs||[]).map((log,i)=>`<div class="admin-row"><span>${safe(log.date)} · ${safe(log.title)}</span><button data-edit-journal="${i}">編輯</button><button class="delete" data-delete-journal="${i}">刪除</button></div>`).join("")||"<div class=empty-state>尚無每日進度</div>";$("#admin-game-list").innerHTML=data.games.map((g,i)=>`<div class="admin-row"><span>${safe(g.name)} <small>· ${safe(g.category)}</small></span><button data-edit-game="${i}">編輯</button><button class="delete" data-delete-game="${i}">刪除</button></div>`).join("")||"<div class='empty-state'>尚無遊戲</div>";$("#admin-video-list").innerHTML=data.videos.map((v,i)=>`<div class="admin-row"><span>${safe(v.title)}</span><button data-edit-video="${i}">編輯</button><button class="delete" data-delete-video="${i}">刪除</button></div>`).join("")||"<div class='empty-state'>尚無影片</div>";$("#p-name").value=data.profile.name||"";$("#p-avatar").value=data.profile.avatar||"";$("#p-bio").value=data.profile.bio||"";$("#p-social").value=(data.profile.social||[]).map(s=>`${s.name} | ${s.url}`).join("\n")}
+
+function resetJournalForm(){$("#journal-form").reset();$("#journal-edit-index").value="";$("#j-date").value=new Date().toLocaleDateString("en-CA");$("#journal-form-heading").textContent="新增每日進度"}
+$("#journal-form-reset").addEventListener("click",resetJournalForm);
+$("#admin-journal-list").addEventListener("click",e=>{
+ const edit=e.target.dataset.editJournal,del=e.target.dataset.deleteJournal;
+ if(del!==undefined){data.logs.splice(+del,1);saveDraft();refreshAdmin()}
+ if(edit!==undefined){const log=data.logs[+edit];$("#journal-edit-index").value=edit;$("#j-date").value=log.date||"";$("#j-title").value=log.title||"";$("#j-content").value=log.content||"";$("#j-video").value=log.video_url||"";$("#j-images").value="";$("#journal-form-heading").textContent="編輯每日進度（可追加圖片）";$("#journal-form").scrollIntoView({behavior:"smooth",block:"center"})}
+});
+function bytesToBase64(buffer){const bytes=new Uint8Array(buffer);let binary="";for(let i=0;i<bytes.length;i+=32768)binary+=String.fromCharCode(...bytes.subarray(i,i+32768));return btoa(binary)}
+$("#journal-form").addEventListener("submit",async e=>{
+ e.preventDefault();const submit=e.submitter;submit.disabled=true;submit.textContent="正在上傳與儲存…";
+ try{
+  const images=[];const edit=$("#journal-edit-index").value;
+  if(edit!=="")images.push(...(data.logs[+edit].images||[]));
+  for(const file of $("#j-images").files){
+   if(file.size>5*1024*1024)throw new Error(file.name+" 超過 5 MB");
+   if(!["image/png","image/jpeg","image/webp","image/gif"].includes(file.type))throw new Error(file.name+" 格式不支援");
+   const uploaded=await api("/api/upload",{method:"POST",body:JSON.stringify({name:file.name,content_type:file.type,content:bytesToBase64(await file.arrayBuffer())})});
+   images.push(uploaded.path);
+  }
+  const entry={date:$("#j-date").value,title:$("#j-title").value.trim(),content:$("#j-content").value.trim(),images,video_url:$("#j-video").value.trim()};
+  if(entry.video_url&&!youtubeId(entry.video_url))throw new Error("影片網址目前只支援 YouTube");
+  if(edit==="")data.logs.unshift(entry);else data.logs[+edit]=entry;
+  await saveDraft();refreshAdmin();resetJournalForm();
+ }catch(err){toast("儲存失敗："+err.message)}
+ finally{submit.disabled=false;submit.textContent="儲存每日進度"}
+});
 function resetGameForm(){ $("#game-form").reset();$("#game-edit-index").value="";$("#game-form-heading").textContent="新增遊戲"}
 $("#game-form-reset").addEventListener("click",resetGameForm);
 $("#admin-game-list").addEventListener("click",e=>{const edit=e.target.dataset.editGame,del=e.target.dataset.deleteGame;if(del!==undefined){data.games.splice(+del,1);saveDraft();refreshAdmin()}if(edit!==undefined){const g=data.games[+edit];$("#game-edit-index").value=edit;$("#g-name").value=g.name;$("#g-category").value=g.category||"Mobile";$("#g-player").value=g.player_id||"";$("#g-cover").value=g.cover||"";$("#g-invite").value=g.invite_url||"";$("#g-qr").value=g.qrcode||"";$("#g-description").value=g.description||"";$("#game-form-heading").textContent="編輯遊戲";$("#game-form").scrollIntoView({behavior:"smooth",block:"center"})}});
