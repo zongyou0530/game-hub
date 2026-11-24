@@ -95,6 +95,7 @@
 
   <div class="modal-backdrop admin-backdrop" id="admin-modal" aria-hidden="true">
     <div class="modal admin-panel" role="dialog" aria-modal="true" aria-labelledby="admin-title">
+      <div class="admin-loading" id="admin-loading" role="status" aria-live="polite"><span class="admin-loading-spinner"></span><strong>正在連線至管理中心</strong><span>正在驗證管理權限並同步雲端資料…</span></div>
       <button class="modal-close" data-close="admin-modal" aria-label="關閉">×</button>
       <div class="eyebrow">CONTENT CONTROL CENTER</div><h2 id="admin-title">內容管理</h2><p class="admin-intro">使用 GitHub 帳號登入後，只有網站管理者可以修改內容；每次儲存前會先備份 GitHub 上的舊資料。</p><div class="form-actions"><button class="button button-quiet" id="admin-logout" type="button">登出管理帳號</button></div>
       <div class="admin-tabs"><button class="admin-tab active" data-tab="games">遊戲管理</button><button class="admin-tab" data-tab="videos">影片管理</button><button class="admin-tab" data-tab="profile">個人資料</button><button class="admin-tab" data-tab="data">匯入 / 匯出</button></div>
