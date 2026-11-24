@@ -135,11 +135,14 @@ export default {
           const mime = String(body.content_type || "");
           const ext = ({ "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp", "image/gif": "gif" })[mime];
           if (!ext || typeof body.content !== "string" || body.content.length > 7_000_000) return json({ error: "Unsupported image or file too large (max 5 MB)" }, 400, headers);
+          const folder = String(body.folder || "logs");
+          const folderMap = { logs: "logs", covers: "covers", qrcodes: "qrcodes" };
+          if (!Object.prototype.hasOwnProperty.call(folderMap, folder)) return json({ error: "Invalid upload folder" }, 400, headers);
           const original = String(body.name || "image").replace(/[^a-zA-Z0-9._-]/g, "-").slice(-70);
           const stamp = new Date().toISOString().replace(/[:.]/g, "-");
-          const path = `assets/logs/${stamp}-${original.replace(/\.[^.]+$/, "")}.${ext}`;
+          const path = `assets/${folderMap[folder]}/${stamp}-${original.replace(/\.[^.]+$/, "")}.${ext}`;
           const token = await installationToken(env);
-          await githubApi(token, `/repos/${OWNER}/${REPO}/contents/${path}`, { method: "PUT", body: JSON.stringify({ message: `Game Hub: upload journal image ${original}`, content: body.content, branch: "main" }) });
+          await githubApi(token, `/repos/${OWNER}/${REPO}/contents/${path}`, { method: "PUT", body: JSON.stringify({ message: `Game Hub: upload ${folder} image ${original}`, content: body.content, branch: "main" }) });
           return json({ ok: true, path }, 200, headers);
         }
         if (url.pathname === "/api/me" && request.method === "GET") return json({ authenticated: true, login: session.login }, 200, headers);
