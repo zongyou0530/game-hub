@@ -99,3 +99,20 @@
 .upload-help{display:block;color:#858b9a;font-size:10px;line-height:1.5;margin-top:2px}
 #game-form input[type=file]{width:100%;padding:9px;background:#181c26;border:1px dashed #42495b;border-radius:7px;color:#aeb4c3;font-size:11px}
 #game-form input[type=file]::file-selector-button{margin-right:10px;padding:7px 10px;border:1px solid #514777;border-radius:6px;background:#29233d;color:#ded5ff;cursor:pointer}
+
+
+/* Mobile layout cleanup: remove decorative hero orb and prevent horizontal page drift. */
+@media (max-width: 560px) {
+  .hero-art { display: none !important; }
+  html, body {
+    overflow-x: clip !important;
+    overscroll-behavior-x: none;
+  }
+  body, main, .section {
+    width: 100%;
+    min-width: 0;
+  }
+  .hero {
+    overflow: clip;
+  }
+}
