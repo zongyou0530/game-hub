@@ -2,7 +2,7 @@ const OWNER = "zongyou0530";
 const REPO = "game-hub";
 const ADMIN_ID = 250560159;
 const FRONTEND = "https://zongyou0530.github.io";
-const FILES = ["data/games.json", "data/videos.json", "data/profile.json"];
+const FILES = ["data/games.json", "data/videos.json", "data/profile.json", "data/logs.json"];
 const SESSION_SECONDS = 3600;
 
 function json(data, status = 200, headers = {}) {
@@ -78,7 +78,7 @@ async function readFiles(env) {
   return result;
 }
 async function writeFiles(env, data) {
-  if (!data || !Array.isArray(data.games) || !Array.isArray(data.videos) || !data.profile || typeof data.profile !== "object") throw new Error("Invalid data payload");
+  if (!data || !Array.isArray(data.games) || !Array.isArray(data.videos) || !Array.isArray(data.logs) || !data.profile || typeof data.profile !== "object") throw new Error("Invalid data payload");
   const token = await installationToken(env);
   const stamp = new Date().toISOString().replace(/[:.]/g, "-");
   // Create a complete backup set before changing any live data file.
@@ -130,6 +130,18 @@ export default {
         if (origin !== FRONTEND) return json({ error: "Origin not allowed" }, 403);
         const session = await getSession(request, env);
         if (!session) return json({ error: "Unauthorized" }, 401, headers);
+        if (url.pathname === "/api/upload" && request.method === "POST") {
+          const body = await request.json();
+          const mime = String(body.content_type || "");
+          const ext = ({ "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp", "image/gif": "gif" })[mime];
+          if (!ext || typeof body.content !== "string" || body.content.length > 7_000_000) return json({ error: "Unsupported image or file too large (max 5 MB)" }, 400, headers);
+          const original = String(body.name || "image").replace(/[^a-zA-Z0-9._-]/g, "-").slice(-70);
+          const stamp = new Date().toISOString().replace(/[:.]/g, "-");
+          const path = `assets/logs/${stamp}-${original.replace(/\.[^.]+$/, "")}.${ext}`;
+          const token = await installationToken(env);
+          await githubApi(token, `/repos/${OWNER}/${REPO}/contents/${path}`, { method: "PUT", body: JSON.stringify({ message: `Game Hub: upload journal image ${original}`, content: body.content, branch: "main" }) });
+          return json({ ok: true, path }, 200, headers);
+        }
         if (url.pathname === "/api/me" && request.method === "GET") return json({ authenticated: true, login: session.login }, 200, headers);
         if (url.pathname === "/api/data" && request.method === "GET") return json(await readFiles(env), 200, headers);
         if (url.pathname === "/api/data" && request.method === "PUT") {
