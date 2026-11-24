@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090a0e">
+  <meta name="description" content="個人遊戲收藏、好友邀請與 Minecraft 影片中心。">
+  <title>GAME HUB — Gaming Identity</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Game Hub 首頁"><span class="brand-mark">G</span><span>GAME<span class="brand-muted">HUB</span></span></a>
+    <nav class="main-nav" aria-label="主要導覽">
+      <a class="nav-link active" href="#home" data-nav="home">總覽</a>
+      <a class="nav-link" href="#library" data-nav="library">遊戲庫</a>
+      <a class="nav-link" href="#videos" data-nav="videos">影片中心</a>
+      <a class="nav-link" href="#profile" data-nav="profile">關於我</a>
+    </nav>
+    <button class="admin-trigger" id="admin-open" type="button"><span class="admin-dot"></span> 管理內容</button>
+  </header>
+
+  <main>
+    <section class="hero section" id="home">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="live-dot"></span> PERSONAL GAMING SPACE</div>
+        <h1>ENTER MY<br><span>GAME WORLD.</span></h1>
+        <p class="hero-description" id="hero-description">收藏遊戲、分享好友邀請，紀錄每一段冒險。</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#library">探索遊戲庫 <span>↗</span></a>
+          <a class="button button-quiet" href="#videos">觀看影片</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
+        <div class="hero-core"><span>GH</span><small>PLAYER<br>ONE</small></div>
+        <div class="floating-chip chip-top">LEVEL UP <b>↗</b></div>
+        <div class="floating-chip chip-bottom"><i></i> GAME LIBRARY</div>
+      </div>
+      <div class="hero-foot"><span>SCROLL TO EXPLORE</span><span class="scroll-line"></span><span id="game-count">00 GAMES</span></div>
+    </section>
+
+    <section class="section library-section" id="library">
+      <div class="section-heading">
+        <div><div class="eyebrow">YOUR COLLECTION</div><h2>遊戲資料庫<span class="heading-period">.</span></h2><p>所有遊戲與好友邀請，一個地方集中管理。</p></div>
+        <div class="heading-tools"><label class="search-box"><span>⌕</span><input id="game-search" type="search" placeholder="搜尋遊戲..." aria-label="搜尋遊戲"></label></div>
+      </div>
+      <div class="filter-row" id="game-filters">
+        <button class="filter-chip selected" data-filter="全部">全部遊戲</button>
+        <button class="filter-chip" data-filter="Mobile">手機遊戲</button>
+        <button class="filter-chip" data-filter="PC">PC 遊戲</button>
+        <button class="filter-chip" data-filter="Console">主機遊戲</button>
+      </div>
+      <div class="game-grid" id="game-grid"><div class="empty-state">正在載入遊戲資料…</div></div>
+    </section>
+
+    <section class="section video-section" id="videos">
+      <div class="section-heading">
+        <div><div class="eyebrow">WATCH & RELIVE</div><h2>影片中心<span class="heading-period">.</span></h2><p>Minecraft 直播存檔、遊戲紀錄與精彩片段。</p></div>
+        <a class="text-link" href="https://www.youtube.com/" target="_blank" rel="noopener">前往 YouTube ↗</a>
+      </div>
+      <div class="video-feature" id="video-feature">
+        <div class="video-player-placeholder"><span class="play-symbol">▶</span><span>SELECT A VIDEO</span></div>
+        <div class="video-feature-info"><div class="eyebrow">FEATURED VIDEO</div><h3>尚未新增影片</h3><p>可以從管理內容新增 YouTube 影片。</p></div>
+      </div>
+      <div class="video-grid" id="video-grid"></div>
+    </section>
+
+    <section class="section profile-section" id="profile">
+      <div class="profile-panel">
+        <div class="profile-avatar" id="profile-avatar">Z</div>
+        <div class="profile-copy"><div class="eyebrow">PLAYER PROFILE</div><h2 id="profile-name">ZONGYOU</h2><p id="profile-bio">喜歡遊戲，也喜歡記錄遊戲中的每一刻。</p><div class="social-links" id="social-links"></div></div>
+        <div class="profile-stats"><div><strong id="stat-games">00</strong><span>GAMES</span></div><div><strong id="stat-videos">00</strong><span>VIDEOS</span></div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><a class="brand" href="#home"><span class="brand-mark">G</span><span>GAME<span class="brand-muted">HUB</span></span></a><span>BUILT FOR THE LOVE OF GAMES.</span><span>© <span id="year"></span> GAME HUB</span></footer>
+
+  <div class="modal-backdrop" id="game-modal" aria-hidden="true">
+    <div class="modal game-modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-game-title">
+      <button class="modal-close" data-close="game-modal" aria-label="關閉">×</button>
+      <div class="modal-game-cover" id="modal-cover"></div>
+      <div class="modal-content"><div class="eyebrow" id="modal-category">GAME</div><h2 id="modal-game-title">Game title</h2><p id="modal-description"></p><div class="player-id-row"><span>PLAYER ID</span><code id="modal-player-id">—</code><button class="small-button" id="copy-id">複製</button></div><div class="modal-actions" id="modal-actions"></div><div class="qr-wrap" id="modal-qr-wrap" hidden><img id="modal-qr" alt="好友邀請 QR Code"><span>使用遊戲掃描器加入好友</span></div></div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="video-modal" aria-hidden="true">
+    <div class="modal video-modal-card" role="dialog" aria-modal="true" aria-label="YouTube 影片播放器"><button class="modal-close" data-close="video-modal" aria-label="關閉">×</button><div class="embed-frame" id="embed-frame"></div><div class="video-modal-title" id="video-modal-title"></div></div>
+  </div>
+
+  <div class="modal-backdrop admin-backdrop" id="admin-modal" aria-hidden="true">
+    <div class="modal admin-panel" role="dialog" aria-modal="true" aria-labelledby="admin-title">
+      <div class="admin-loading" id="admin-loading" role="status" aria-live="polite"><span class="admin-loading-spinner"></span><strong>正在連線至管理中心</strong><span>正在驗證管理權限並同步雲端資料…</span></div>
+      <button class="modal-close" data-close="admin-modal" aria-label="關閉">×</button>
+      <div class="eyebrow">CONTENT CONTROL CENTER</div><h2 id="admin-title">內容管理</h2><p class="admin-intro">使用 GitHub 帳號登入後，只有網站管理者可以修改內容；每次儲存前會先備份 GitHub 上的舊資料。</p><div class="form-actions"><button class="button button-quiet" id="admin-logout" type="button">登出管理帳號</button></div>
+      <div class="admin-tabs"><button class="admin-tab active" data-tab="games">遊戲管理</button><button class="admin-tab" data-tab="videos">影片管理</button><button class="admin-tab" data-tab="profile">個人資料</button><button class="admin-tab" data-tab="data">匯入 / 匯出</button></div>
+      <div class="admin-pane active" id="pane-games"><div class="admin-list" id="admin-game-list"></div><h3 id="game-form-heading">新增遊戲</h3><form id="game-form" class="admin-form"><input type="hidden" id="game-edit-index"><div class="form-grid"><label>遊戲名稱<input id="g-name" required placeholder="例如：Minecraft"></label><label>平台<select id="g-category"><option>Mobile</option><option>PC</option><option>Console</option></select></label><label>玩家 ID<input id="g-player" placeholder="玩家 ID"></label><label>封面圖片路徑<input id="g-cover" placeholder="assets/covers/game.jpg"></label><label class="span-two">好友邀請連結<input id="g-invite" type="url" placeholder="https://..."></label><label class="span-two">QR Code 圖片路徑<input id="g-qr" placeholder="assets/qrcodes/game.png"></label><label class="span-two">遊戲描述<textarea id="g-description" rows="2" placeholder="簡短介紹"></textarea></label></div><div class="form-actions"><button class="button button-primary" type="submit">儲存遊戲</button><button class="button button-quiet" type="button" id="game-form-reset">清除</button></div></form></div>
+      <div class="admin-pane" id="pane-videos"><div class="admin-list" id="admin-video-list"></div><h3 id="video-form-heading">新增影片</h3><form id="video-form" class="admin-form"><input type="hidden" id="video-edit-index"><div class="form-grid"><label class="span-two">影片標題<input id="v-title" required placeholder="Minecraft 生存日記 #01"></label><label>YouTube 網址<input id="v-url" required placeholder="https://www.youtube.com/watch?v=..."></label><label>分類<input id="v-category" placeholder="Minecraft 直播"></label><label class="span-two">簡介<textarea id="v-description" rows="2"></textarea></label></div><div class="form-actions"><button class="button button-primary" type="submit">儲存影片</button><button class="button button-quiet" type="button" id="video-form-reset">清除</button></div></form></div>
+      <div class="admin-pane" id="pane-profile"><form id="profile-form" class="admin-form"><div class="form-grid"><label>暱稱<input id="p-name"></label><label>頭像文字<input id="p-avatar" maxlength="3"></label><label class="span-two">個人簡介<textarea id="p-bio" rows="3"></textarea></label><label class="span-two">社群連結（每行一個，格式：名稱 | 網址）<textarea id="p-social" rows="4" placeholder="YouTube | https://youtube.com/@..."></textarea></label></div><div class="form-actions"><button class="button button-primary" type="submit">儲存個人資料</button></div></form></div>
+      <div class="admin-pane" id="pane-data"><div class="data-actions"><button class="button button-primary" id="export-all">匯出全部資料 JSON</button><label class="button button-quiet file-button">匯入 JSON<input type="file" id="import-file" accept="application/json"></label><button class="button button-quiet" id="reset-data">還原範例資料</button></div><div class="notice"><strong>雲端儲存與備份</strong><ol><li>登入後修改遊戲、影片或個人資料。</li><li>按下儲存時，系統會先把三份舊 JSON 備份到 GitHub 的 <code>backups/</code>。</li><li>備份完成後才更新 <code>data/</code> 內的正式資料。</li><li>圖片仍需先上傳到 Repository 的 <code>assets/</code> 資料夾，再填入圖片路徑。</li></ol></div><p class="admin-status" id="admin-status">尚未連線至雲端管理 API。</p></div>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="js/main.js"></script>
+</body>
+</html>
