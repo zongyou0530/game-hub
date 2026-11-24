@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Clash Royale",
+    "category": "Mobile",
+    "player_id": "YOUR_PLAYER_ID",
+    "description": "皇室戰爭好友邀請中心。更新你的玩家標籤與邀請連結。",
+    "cover": "",
+    "qrcode": "",
+    "invite_url": ""
+  },
+  {
+    "name": "Monster Strike",
+    "category": "Mobile",
+    "player_id": "YOUR_PLAYER_ID",
+    "description": "怪物彈珠（日版）玩家資訊與好友邀請。",
+    "cover": "",
+    "qrcode": "",
+    "invite_url": ""
+  },
+  {
+    "name": "Minecraft",
+    "category": "PC",
+    "player_id": "Java Edition",
+    "description": "Minecraft Java Edition 生存世界與遊戲紀錄。",
+    "cover": "",
+    "qrcode": "",
+    "invite_url": ""
+  },
+  {
+    "name": "PPMobile",
+    "category": "Mobile",
+    "player_id": "f",
+    "cover": "",
+    "invite_url": "",
+    "qrcode": "",
+    "description": ""
+  }
+]
