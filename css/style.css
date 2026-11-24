@@ -116,3 +116,40 @@
     overflow: clip;
   }
 }
+
+
+/* Mobile spacing and vertical-only browsing */
+@media (max-width: 560px) {
+  html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden !important;
+    overscroll-behavior-x: none;
+    touch-action: pan-y;
+  }
+  body, main {
+    min-width: 0;
+    width: 100%;
+  }
+  .section {
+    width: calc(100% - 36px) !important;
+    max-width: 100% !important;
+    min-width: 0;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  .topbar {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+  .footer {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+  .profile-panel, .journal-entry, .video-feature, .game-card {
+    min-width: 0;
+  }
+  .profile-panel {
+    padding: 18px !important;
+  }
+}
