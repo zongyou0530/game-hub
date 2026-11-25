@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Clash Royale",
+    "player_id": "道耳吞原子說噎到了ID",
+    "cover": "assets/covers/clashroyale.jpg",
+    "invite_url": "https://link.clashroyale.com/invite/friend/cnt?tag=VJ0JGUCVP&token=3jdnjcwr&platform=iOS&m=0",
+    "qrcode": "assets/logs/2026-11-25T03-24-13-489Z-IMG_5855.jpg",
+    "description": "黃氏兄弟上課不專心"
+  },
+  {
+    "name": "Monster Strike",
+    "category": "Mobile",
+    "player_id": "道耳吞原子說噎到了",
+    "cover": "assets/covers/怪物彈珠.png",
+    "invite_url": "https://monsterstrike-tw-app.onelink.me/5KCi/v5v0ctz0",
+    "qrcode": "",
+    "description": "領取邀請獎勵並開始遊玩怪物彈珠吧！ 安裝怪物彈珠後，點擊下方URL啟動遊戲應用程式，在「邀請彈珠好手」中同意收到的「邀請」吧！"
+  },
+  {
+    "name": "Minecraft",
+    "category": "PC",
+    "player_id": "",
+    "cover": "assets/logs/2026-11-24T15-01-13-213Z-minecraft.jpg",
+    "invite_url": "",
+    "qrcode": "",
+    "description": "Minecraft Java Edition 生存世界與遊戲紀錄。"
+  },
+  {
+    "name": "Pokémon GO",
+    "category": "Mobile",
+    "player_id": "476377462727",
+    "cover": "assets/covers/pokemongo.jpg",
+    "invite_url": "",
+    "qrcode": "",
+    "description": ""
+  }
+]
