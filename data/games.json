@@ -26,11 +26,10 @@
   },
   {
     "name": "Pokémon GO",
-    "category": "Mobile",
     "player_id": "476377462727",
     "cover": "assets/covers/pokemongo.jpg",
     "invite_url": "",
-    "qrcode": "",
+    "qrcode": "assets/logs/2026-11-25T03-26-10-774Z-IMG_5857.jpg",
     "description": ""
   }
 ]
